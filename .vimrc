@@ -2,7 +2,6 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 "railscasts-theme
 "set mouse=a
-colorscheme molokai
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -14,10 +13,12 @@ Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
-Plugin 'elixir-lang/vim-elixir'
 Plugin 'stanangeloff/php.vim'
 Plugin 'tmhedberg/SimpylFold'
-
+Plugin 'sickill/vim-monokai'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -26,10 +27,18 @@ let mapleader = ','
 let g:mapleader = ','
 let g:EasyMotion_leader_key=','
 syntax on
+colorscheme monokai
+let python_highlight_all=1
 " Tagbar
 let g:tagbar_width=35
 let g:tagbar_autofocus=1
 nmap <F6> :TagbarToggle<CR>
+
+
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+
 
 "==========================================
 "" General Settings 基础设置
@@ -39,8 +48,6 @@ nmap <F6> :TagbarToggle<CR>
 
 set guifont=Monaco:h14          " 字体 && 字号
 " history存储容量
-set history=2000
-
 set autoread          " 文件修改之后自动载入。
 set shortmess=atI       " 启动的时候不显示那个援助索马里儿童的提示
 " 取消备份。 视情况自己改
@@ -111,23 +118,6 @@ nnoremap gj j
 " F4 换行开关
 " F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
 " F6 语法开关，关闭语法可以加快大文件的展示
-function! HideNumber()
-  if(&relativenumber == &number)
-    set relativenumber! number!
-  elseif(&number)
-    set number!
-  else
-    set relativenumber!
-  endif
-  set number?
-endfunc
-nnoremap <F2> :call HideNumber()<CR>
-nnoremap <F3> :set list! list?<CR>
-nnoremap <F4> :set wrap! wrap?<CR>
-set pastetoggle=<F5> 
-nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
-nnoremap <F8> <Esc>:w !ruby -w<CR>
-
 "Smart way to move between windows 分屏窗口移动
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -181,42 +171,5 @@ vnoremap > >gv
 map <Leader>sa ggVG"
 nnoremap <leader>v V`}
 
-"  替换 Esc
-inoremap kj <Esc>
-
-
-"设置文内智能搜索提示
-" 高亮search命中的文本。
-set hlsearch
-" 打开增量搜索模式,随着键入即时搜索
-set incsearch
-" 搜索时忽略大小写
-set ignorecase
-" 有一个或以上大写字母时仍大小写敏感
-set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
-" 代码折叠
-set foldenable
-" 相对行号      行号变成相对，可以用 nj  nk   进行跳转 5j   5k 上下跳5行
-set relativenumber number
-
-" 相对行号      行号变成相对，可以用 nj  nk   进行跳转 5j   5k 上下跳5行
-set relativenumber number
-au FocusLost * :set norelativenumber number
-au FocusGained * :set relativenumber
-" 插入模式下用绝对行号, 普通模式下用相对
-autocmd InsertEnter * :set norelativenumber number
-autocmd InsertLeave * :set relativenumber
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber number
-  else
-    set relativenumber
-  endif
-endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
-
-map <Leader>n :NERDTreeToggle<CR>
-set listchars=tab:>~,trail:_,extends:>,precedes:<
-set list
 set t_Co=256
 "set mouse=a
