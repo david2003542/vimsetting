@@ -9,13 +9,15 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Bundle 'VundleVim/Vundle.vim'
-Bundle 'bling/vim-airline'
-Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'scrooloose/nerdtree'
-Bundle 'elixir-lang/vim-elixir'
-Bundle 'stanangeloff/php.vim'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'scrooloose/nerdtree'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'stanangeloff/php.vim'
+Plugin 'tmhedberg/SimpylFold'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
