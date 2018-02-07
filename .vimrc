@@ -34,7 +34,7 @@ let g:tagbar_width=35
 let g:tagbar_autofocus=1
 nmap <F6> :TagbarToggle<CR>
 
-
+set number relativenumber
 set foldmethod=indent
 set foldlevel=99
 nnoremap <space> za
